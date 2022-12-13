@@ -17,10 +17,7 @@ public enum MatchingFunction {
     public static String printKeysAndValues() {
         StringBuilder sb = new StringBuilder();
         for (MatchingFunction matchingFunction : MatchingFunction.values()) {
-            sb.append(matchingFunction.key)
-                    .append(". ")
-                    .append(matchingFunction.value)
-                    .append(System.lineSeparator());
+            sb.append(matchingFunction.key + ". " + matchingFunction.value + System.lineSeparator());
         }
         return sb.toString();
     }

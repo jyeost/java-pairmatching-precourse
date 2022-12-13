@@ -15,4 +15,9 @@ public class InputView implements Input {
             return getMatchingFunction();
         }
     }
+
+    @Override
+    public void getCourseLevelMission() {
+        System.out.println();
+    }
 }

@@ -17,9 +17,15 @@ public class PairMatchingController {
         MatchingFunction matchingFunction;
         do {
             matchingFunction = input.getMatchingFunction();
-
-
+            if (matchingFunction == MatchingFunction.MATCHING) doPairMatching();
+            // if (matchingFunction == MatchingFunction.VIEW) doPairMatching();
+            // if (matchingFunction == MatchingFunction.INIT_MATCHING) doPairMatching();
         } while (matchingFunction != MatchingFunction.QUIT);
+    }
+
+    private void doPairMatching() {
+        output.printCourseLevelMission();
+        input.getCourseLevelMission();
     }
 
 }
