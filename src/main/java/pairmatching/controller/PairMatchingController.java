@@ -5,6 +5,8 @@ import pairmatching.model.MatchingFunction;
 import pairmatching.view.Input;
 import pairmatching.view.Output;
 
+import java.io.IOException;
+
 public class PairMatchingController {
     private final Input input;
     private final Output output;
@@ -27,6 +29,12 @@ public class PairMatchingController {
     private void doPairMatching() {
         output.printCourseLevelMission();
         Crew crew = input.getCourseLevelMission();
+        try{
+            crew.matchPair();
+        } catch (IOException e){
+
+        }
+
     }
 
 }

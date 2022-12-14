@@ -1,5 +1,11 @@
 package pairmatching.model;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crew {
@@ -9,6 +15,7 @@ public class Crew {
     private Level level;
     private String mission;
     private List<Pair> pairs;
+    private List<String> crewNames;
 
     public Crew(String userInput) {
         validateNotNullHavingComma(userInput);
@@ -39,6 +46,31 @@ public class Crew {
         this.course = Course.getCourse(userInputs[0].trim());
         this.level = Level.getLevel(userInputs[1].trim());
         this.mission = userInputs[2].trim();
+        crewNames = new ArrayList<>();
     }
 
+    public void matchPair() throws IOException {
+        readFile();
+        List<String> shuffledCrew = Randoms.shuffle(crewNames);
+        for (int i = 0; i < shuffledCrew.size(); i+=2) {
+            if (i == shuffledCrew.size() - 3) {
+                pairs.add(new Pair(shuffledCrew.subList(i, i + 2)));
+                break;
+            }
+            pairs.add(new Pair(shuffledCrew.subList(i, i + 1)));
+        }
+    }
+
+    private void readFile() throws IOException {
+        String path = "C:\\Users\\sist\\java-pairmatching-precourse\\src\\main\\resources\\";
+        if (course == Course.BACKEND) path += "backend-crew.md";
+        if (course == Course.FRONTEND) path += "frontend-crew.md";
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        while (true) {
+            String line = br.readLine();
+            if (line == null) break;
+            crewNames.add(line);
+        }
+        br.close();
+    }
 }
