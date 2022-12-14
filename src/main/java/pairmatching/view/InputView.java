@@ -3,6 +3,7 @@ package pairmatching.view;
 import camp.nextstep.edu.missionutils.Console;
 import pairmatching.model.Crew;
 import pairmatching.model.MatchingFunction;
+import pairmatching.model.Rematching;
 
 public class InputView implements Input {
     @Override
@@ -25,6 +26,18 @@ public class InputView implements Input {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getCourseLevelMission();
+        }
+    }
+
+    @Override
+    public Rematching getRematching() {
+        try {
+            System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
+            System.out.println(Rematching.print());
+            return Rematching.checkInput(Console.readLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getRematching();
         }
     }
 }

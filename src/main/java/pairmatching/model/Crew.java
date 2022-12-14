@@ -46,25 +46,34 @@ public class Crew {
         this.course = Course.getCourse(userInputs[0].trim());
         this.level = Level.getLevel(userInputs[1].trim());
         this.mission = userInputs[2].trim();
-        crewNames = new ArrayList<>();
+        this.crewNames = new ArrayList<>();
+        this.pairs = new ArrayList<>();
     }
 
-    public void matchPair() throws IOException {
+    public void matchPair() {
         readFile();
         List<String> shuffledCrew = Randoms.shuffle(crewNames);
-        for (int i = 0; i < shuffledCrew.size(); i+=2) {
+        for (int i = 0; i < shuffledCrew.size(); i += 2) {
             if (i == shuffledCrew.size() - 3) {
-                pairs.add(new Pair(shuffledCrew.subList(i, i + 2)));
+                pairs.add(new Pair(shuffledCrew.subList(i, i + 3)));
                 break;
             }
-            pairs.add(new Pair(shuffledCrew.subList(i, i + 1)));
+            pairs.add(new Pair(shuffledCrew.subList(i, i + 2)));
         }
     }
 
-    private void readFile() throws IOException {
+    private void readFile() {
         String path = "C:\\Users\\sist\\java-pairmatching-precourse\\src\\main\\resources\\";
         if (course == Course.BACKEND) path += "backend-crew.md";
         if (course == Course.FRONTEND) path += "frontend-crew.md";
+        try {
+            readPath(path);
+        } catch (IOException e) {
+            System.out.println("파일 읽기에 실패했습니다.");
+        }
+    }
+
+    private void readPath(String path) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
         while (true) {
             String line = br.readLine();
@@ -72,5 +81,19 @@ public class Crew {
             crewNames.add(line);
         }
         br.close();
+    }
+
+    public boolean isEqualMission(Crew crew) {
+        return this.course.equals(crew.course) && this.level.equals(crew.level) && this.mission.equals(crew.mission);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Pair pair : pairs) {
+            sb.append(pair.toString())
+                    .append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 }
