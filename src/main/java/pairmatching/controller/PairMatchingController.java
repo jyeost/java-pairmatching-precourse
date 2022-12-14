@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import pairmatching.model.Crew;
 import pairmatching.model.MatchingFunction;
 import pairmatching.view.Input;
 import pairmatching.view.Output;
@@ -25,7 +26,7 @@ public class PairMatchingController {
 
     private void doPairMatching() {
         output.printCourseLevelMission();
-        input.getCourseLevelMission();
+        Crew crew = input.getCourseLevelMission();
     }
 
 }

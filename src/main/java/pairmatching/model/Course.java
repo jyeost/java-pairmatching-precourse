@@ -18,4 +18,18 @@ public enum Course {
         courses = courses.substring(0, courses.length() - 3);
         return courses;
     }
+
+    public static boolean isCourse(String inputCourse) {
+        for (Course course : Course.values()) {
+            if (course.name.equals(inputCourse)) return true;
+        }
+        return false;
+    }
+
+    public static Course getCourse(String inputCourse) {
+        for (Course course : Course.values()) {
+            if (course.name.equals(inputCourse)) return course;
+        }
+        return null;
+    }
 }

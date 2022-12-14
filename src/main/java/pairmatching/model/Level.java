@@ -28,4 +28,22 @@ public enum Level {
         }
         return sb.toString();
     }
+
+    public static boolean isLevelMission(String inputLevel, String inputMission) {
+        for (Level level : Level.values()) {
+            if (level.name.equals(inputLevel) && level.missions.contains(inputMission)) return true;
+        }
+        return false;
+    }
+
+    public static boolean isLevel3And5(String inputLevel) {
+        return LEVEL3.name.equals(inputLevel) || LEVEL5.name.equals(inputLevel);
+    }
+
+    public static Level getLevel(String inputLevel) {
+        for (Level level : Level.values()) {
+            if (level.name.equals(inputLevel)) return level;
+        }
+        return null;
+    }
 }
